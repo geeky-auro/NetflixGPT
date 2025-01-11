@@ -64,3 +64,7 @@ export default tseslint.config({
 - NetflixGPT
   - Search Bar
   - Movie Suggestions
+
+## Project Preview
+
+![alt text](image.png)
