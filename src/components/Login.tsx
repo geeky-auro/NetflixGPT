@@ -1,7 +1,12 @@
-import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { useRef, useState } from "react";
 import Background from "./Background";
 import { checkValidData } from "../utils/FormValidation";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebaseConfig";
 
 const Login = () => {
   const [formTitleText, setTitleText] = useState<string>("Sign In");
@@ -22,6 +27,49 @@ const Login = () => {
       password.current?.value ?? ""
     );
     setErrorMessage(validation ? validation : "");
+
+    if (!validation == null) return;
+    // If validation passes, handle the form submission here
+    if (isSignUpEnable) {
+      // Perform validation for Sign Up Page
+      console.log("In Sign Up Block !");
+
+      createUserWithEmailAndPassword(
+        auth,
+        email.current?.value ?? "",
+        password.current?.value ?? ""
+      )
+        .then((userCredentials) => {
+          const user = userCredentials.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorMessage);
+          console.log(errorCode, " " + errorMessage);
+        });
+    } else {
+      // Perform validation for Sign In Page
+      console.log("In Sign In Block !");
+      signInWithEmailAndPassword(
+        auth,
+        email.current?.value ?? "",
+        password.current?.value ?? ""
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorMessage);
+          console.log(errorCode, " ", errorMessage);
+        });
+    }
   };
 
   return (
