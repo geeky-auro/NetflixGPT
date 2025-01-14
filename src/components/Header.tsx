@@ -1,6 +1,25 @@
 import User from "../assets/User";
+import { signOut } from "firebase/auth";
+import { auth } from "../utils/firebaseConfig";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const user = useSelector((store: any) => store.user);
+  const handleSignOut = () => {
+    // Sign out logic here
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        navigate("/");
+      })
+      .catch((error) => {
+        // An error happened.
+        navigate("/error");
+      });
+  };
+
   return (
     <div className="absolute inset-0 flex justify-between  p-4">
       <div>
@@ -11,18 +30,19 @@ const Header = () => {
         />
       </div>
 
-      <div className="ml-auto flex items-start space-x-4">
-        <div>
-          <img
-            className="w-12"
-            src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png?20201013161117"
-            alt="Netflix Avatar"
-          />
+      {user && (
+        <div className="ml-auto flex items-start space-x-4">
+          <div>
+            <img className="w-12" src={user?.photoURL} alt="Netflix Avatar" />
+          </div>
+          <button
+            className="text-white font-bold px-4 py-2 rounded-md focus:outline-none bg-red-600 hover:bg-red-700"
+            onClick={handleSignOut}
+          >
+            Sign Out
+          </button>
         </div>
-        <button className="text-white font-bold px-4 py-2 rounded-md focus:outline-none bg-red-600 hover:bg-red-700">
-          Sign Out
-        </button>
-      </div>
+      )}
     </div>
   );
 };

@@ -5,9 +5,12 @@ import { checkValidData } from "../utils/FormValidation";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebaseConfig";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [formTitleText, setTitleText] = useState<string>("Sign In");
@@ -20,6 +23,7 @@ const Login = () => {
   const name = useRef<HTMLInputElement>(null);
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const onSubmitForm = () => {
@@ -45,7 +49,30 @@ const Login = () => {
         .then((userCredentials) => {
           const user = userCredentials.user;
           console.log(user);
-          navigate("/browse");
+          updateProfile(user, {
+            displayName: name.current?.value ?? "",
+            photoURL:
+              "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png?20201013161117",
+          })
+            .then(() => {
+              // Profile updated!
+              // ...
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+              setErrorMessage(error.message);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
