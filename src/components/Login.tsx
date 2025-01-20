@@ -39,7 +39,6 @@ const Login = () => {
     // If validation passes, handle the form submission here
     if (isSignUpEnable) {
       // Perform validation for Sign Up Page
-      console.log("In Sign Up Block !");
 
       createUserWithEmailAndPassword(
         auth,
@@ -48,7 +47,6 @@ const Login = () => {
       )
         .then((userCredentials) => {
           const user = userCredentials.user;
-          console.log(user);
           updateProfile(user, {
             displayName: name.current?.value ?? "",
             photoURL:
@@ -77,11 +75,9 @@ const Login = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorMessage);
-          console.log(errorCode, " " + errorMessage);
         });
     } else {
       // Perform validation for Sign In Page
-      console.log("In Sign In Block !");
       signInWithEmailAndPassword(
         auth,
         email.current?.value ?? "",
@@ -90,7 +86,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
           navigate("/browse");
           // ...
         })
@@ -98,7 +93,6 @@ const Login = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorMessage);
-          console.log(errorCode, " ", errorMessage);
         });
     }
   };

@@ -1,7 +1,7 @@
 const VideoTitle = (props: any) => {
   const { title, overview } = props;
   return (
-    <div className="pt-36 px-12">
+    <div className="w-screen aspect-video pt-[20%] px-12 absolute text-white bg-gradient-to-r">
       <div className="font-bold text-6xl">{title}</div>
       <div className="py-6 text-lg w-1/2">{overview}</div>
       <div className="">
