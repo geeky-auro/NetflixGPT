@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import MovieList from "./MovieList";
 
@@ -18,7 +17,7 @@ const SecondaryContainer = () => {
         <MovieList title={"Popular"} movies={movies?.popularMovies?.results} />
         <MovieList
           title={"Upcoming Movies"}
-          movies={movies?.nowPlayingMovies?.results}
+          movies={movies?.upcomingMovies?.results}
         />
         <MovieList
           title={"Horror"}
