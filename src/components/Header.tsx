@@ -5,11 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
+import { toggleGPTSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store: any) => store.user);
   const dispatcher = useDispatch();
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -35,6 +37,11 @@ const Header = () => {
     // Un subscribe when the component unmounts
     return () => unsubscribe();
   }, []);
+  const handleGPTSearchClick = () => {
+    // Toggle GPT search
+    console.log("Clicked Successfully the Search GPT Button");
+    dispatcher(toggleGPTSearchView());
+  };
   const handleSignOut = () => {
     // Sign out logic here
     signOut(auth)
@@ -49,7 +56,7 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute inset-0 flex justify-between  p-4">
+    <div className="absolute inset-0 flex justify-between  p-4 z-30">
       <div>
         <img
           src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
@@ -60,6 +67,12 @@ const Header = () => {
 
       {user && (
         <div className="ml-auto flex items-start space-x-4">
+          <button
+            className="py-2 px-4 mx-4 my-2 bg-purple-800 text-white rounded-lg"
+            onClick={handleGPTSearchClick}
+          >
+            GPT Search
+          </button>
           <div>
             <img className="w-12" src={user?.photoURL} alt="Netflix Avatar" />
           </div>
