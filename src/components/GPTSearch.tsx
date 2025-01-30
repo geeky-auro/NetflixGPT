@@ -5,7 +5,7 @@ import GptSearchBar from "./GptSearchBar";
 const GPTSearch = () => {
   return (
     <div>
-      <div className="absolute -z-20">
+      <div className="fixed -z-20">
         <Background />
       </div>
       <div className="relative z-35">

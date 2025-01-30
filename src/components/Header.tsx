@@ -43,7 +43,6 @@ const Header = () => {
   }, []);
   const handleGPTSearchClick = () => {
     // Toggle GPT search
-    console.log("Clicked Successfully the Search GPT Button");
     dispatcher(toggleGPTSearchView());
   };
   const handleSignOut = () => {

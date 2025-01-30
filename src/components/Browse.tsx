@@ -16,7 +16,6 @@ const Browse = () => {
   const showGptSearchStatus = useSelector(
     (store: any) => store.gpt?.showGptSearch
   );
-  console.log(showGptSearchStatus);
 
   return (
     <div>
