@@ -1,4 +1,3 @@
-import User from "../assets/User";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebaseConfig";
 import { useNavigate } from "react-router-dom";
@@ -6,11 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
 import { toggleGPTSearchView } from "../utils/gptSlice";
+import { SUPPORTED_LANGUAGES } from "../utils/constants";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const navigate = useNavigate();
-  const user = useSelector((store: any) => store.user);
+  const user = useSelector((store: any) => store?.user);
   const dispatcher = useDispatch();
+  const isGptPage: boolean = useSelector(
+    (store: any) => store?.gpt?.showGptSearch
+  );
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -55,6 +59,10 @@ const Header = () => {
       });
   };
 
+  const handleLanguageChange = (e: any) => {
+    dispatcher(changeLanguage(e.target.value));
+  };
+
   return (
     <div className="absolute inset-0 flex justify-between  p-4 z-30">
       <div>
@@ -67,11 +75,23 @@ const Header = () => {
 
       {user && (
         <div className="ml-auto flex items-start space-x-4">
+          {isGptPage && (
+            <select
+              className="p-2 m-2 bg-gray-900 text-white"
+              onChange={handleLanguageChange}
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
           <button
             className="py-2 px-4 mx-4 my-2 bg-purple-800 text-white rounded-lg"
             onClick={handleGPTSearchClick}
           >
-            GPT Search
+            {isGptPage ? "Home" : "GPT Search"}
           </button>
           <div>
             <img className="w-12" src={user?.photoURL} alt="Netflix Avatar" />
