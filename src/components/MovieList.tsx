@@ -1,6 +1,6 @@
 import MovieCard from "./MovieCard";
 
-const MovieList = ({ title, movies }) => {
+const MovieList = ({ title, movies }: { title: any; movies: any }) => {
   return (
     <div className="px-6">
       <div className="text-3xl py-4 text-white">

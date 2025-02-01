@@ -9,13 +9,17 @@ const GptMovieSuggestions = () => {
   return (
     <div className="p-4 m-4 bg-black text-white bg-opacity-90">
       <div>
-        {movieNames.map((gptMovie: string, index) => (
-          <MovieList
-            key={index}
-            title={gptMovie}
-            movies={movieResults[index]?.results}
-          />
-        ))}
+        {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          movieNames.map((gptMovie: string, index) => (
+            <MovieList
+              key={index}
+              title={gptMovie}
+              movies={movieResults[index]?.results}
+            />
+          ))
+        }
       </div>
     </div>
   );

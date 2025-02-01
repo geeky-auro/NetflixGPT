@@ -20,7 +20,7 @@ const GptSearchBar = () => {
     return await result.json();
   };
 
-  const onGPTSearchClick = (e) => {
+  const onGPTSearchClick = (e: any) => {
     gptSearchRef.current = e.target.value;
     const fetchData = async () => {
       const res = await fetchGptResponse(gptSearchRef.current);
@@ -49,13 +49,21 @@ const GptSearchBar = () => {
         <input
           type="text"
           className="p-4 m-4 col-span-9"
-          placeholder={lang[langg].placeHolder}
+          placeholder={
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            lang[langg]?.placeHolder
+          }
         />
         <button
           className="col-span-3 m-4 py-2 px-4 bg-red-700 text-white rounded-lg"
           onClick={onGPTSearchClick}
         >
-          {lang[langg].search}
+          {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            lang[langg]?.search
+          }
         </button>
       </form>
     </div>

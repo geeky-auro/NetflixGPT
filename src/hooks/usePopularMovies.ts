@@ -4,7 +4,9 @@ import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
 
 const usePopularMovies = () => {
-  const popularMovies = useSelector((store) => store.movies.addPopularMovies);
+  const popularMovies = useSelector(
+    (store: any) => store.movies.addPopularMovies
+  );
   const dispatch = useDispatch();
   const getPopularPlayingMovies = async () => {
     const api = await fetch(

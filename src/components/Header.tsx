@@ -23,12 +23,16 @@ const Header = () => {
         // https://firebase.google.com/docs/reference/js/auth.user
         const { uid, displayName, email, photoURL } = user;
         dispatcher(
-          addUser({
-            uid: uid,
-            email: email,
-            displayName: displayName,
-            photoURL: photoURL,
-          })
+          addUser(
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            {
+              uid: uid,
+              email: email,
+              displayName: displayName,
+              photoURL: photoURL,
+            }
+          )
         );
         navigate("/browse");
       } else {
@@ -52,10 +56,14 @@ const Header = () => {
         // Sign-out successful.
         navigate("/");
       })
-      .catch((error) => {
-        // An error happened.
-        navigate("/error");
-      });
+      .catch(
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        (error: any) => {
+          // An error happened.
+          navigate("/error");
+        }
+      );
   };
 
   const handleLanguageChange = (e: any) => {

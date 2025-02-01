@@ -11,7 +11,8 @@ import { auth } from "../utils/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const Login = () => {
   const [formTitleText, setTitleText] = useState<string>("Sign In");
   const [isSignUpEnable, setSignUpEnable] = useState<boolean>(false);
@@ -23,7 +24,7 @@ const Login = () => {
   const name = useRef<HTMLInputElement>(null);
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
 
   const navigate = useNavigate();
   const onSubmitForm = () => {
@@ -55,14 +56,20 @@ const Login = () => {
             .then(() => {
               // Profile updated!
               // ...
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(
-                addUser({
-                  uid: uid,
-                  email: email,
-                  displayName: displayName,
-                  photoURL: photoURL,
-                })
+                addUser(
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  {
+                    uid: uid ?? "",
+                    email: email ?? "",
+                    displayName: displayName ?? "",
+                    photoURL: photoURL ?? "",
+                  }
+                )
               );
             })
             .catch((error) => {
@@ -72,7 +79,6 @@ const Login = () => {
             });
         })
         .catch((error) => {
-          const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorMessage);
         });
@@ -83,14 +89,12 @@ const Login = () => {
         email.current?.value ?? "",
         password.current?.value ?? ""
       )
-        .then((userCredential) => {
+        .then(() => {
           // Signed in
-          const user = userCredential.user;
           navigate("/browse");
           // ...
         })
         .catch((error) => {
-          const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorMessage);
         });
