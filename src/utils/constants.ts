@@ -2,8 +2,7 @@ export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4Zjk0ZGI0MmJmNDMwNGRiY2U4ZDVlM2YyZGU5Y2QzOSIsIm5iZiI6MTczNzE2MjQwNi43MDU5OTk5LCJzdWIiOiI2NzhhZmVhNmFmY2IzMmM0OTk0MmVkZWIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.zQuIl3xVOrbKx2GXlwSm0jyrr7Xi6b4yay_m86pxnUg",
+    Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
   },
 };
 
@@ -27,3 +26,17 @@ export const SUPPORTED_LANGUAGES = [
     name: "German",
   },
 ];
+
+export const GROQ_aPI_KEY = import.meta.env.VITE_GROQ_API_KEY;
+
+export const API_GROQ_URL = import.meta.env.VITE_GROQ_API_URL;
+
+export const GROQ_MODEL = import.meta.env.VITE_APP_GROQ_MODEL;
+
+export const LLM_PROMPT = (mood: string) => {
+  return `You are an advanced Movie Recommendation System. Given a mood or theme, suggest exactly five movies that best match the query. Provide a mix of Bollywood and Hollywood movies where appropriate.
+                    Strictly follow this format: Movie1, Movie2, Movie3, Movie4, Movie5.
+                    Example: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya.*
+                    Query: ${mood}
+                    Response Format: (Only return movie names, comma-separated, without additional text.)`;
+};
