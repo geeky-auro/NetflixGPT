@@ -8,7 +8,7 @@ const GPTSearch = () => {
       <div className="fixed -z-20">
         <Background />
       </div>
-      <div className="relative z-35">
+      <div className="relative z-35 pt-[30%] md:p-0">
         <GptSearchBar />
         <GptMovieSuggestions />
       </div>

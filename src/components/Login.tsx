@@ -102,7 +102,7 @@ const Login = () => {
       <Header />
       <div className="absolute inset-0 flex items-center justify-center">
         <form
-          className="w-3/12 bg-black opacity-90 p-12 rounded-lg shadow-lg"
+          className="w-full md:w-3/12 bg-black opacity-90 p-12 rounded-lg shadow-lg"
           onSubmit={(e) => e.preventDefault()}
         >
           <h1 className="text-3xl p-4 text-white font-bold">{formTitleText}</h1>

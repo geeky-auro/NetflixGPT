@@ -1,13 +1,13 @@
 const VideoTitle = (props: any) => {
   const { title, overview } = props;
   return (
-    <div className="w-screen aspect-video pt-[20%] px-12 absolute text-white bg-gradient-to-r">
-      <div className="font-bold text-6xl">{title}</div>
-      <div className="py-6 text-lg w-1/2">{overview}</div>
+    <div className="w-screen aspect-video pt-[20%] md:px-24 px-12 absolute text-white bg-gradient-to-r">
+      <h1 className="text-2xl md:text-6xl font-bold ">{title}</h1>
+      <p className="hidden md:inline-block py-6 text-lg w-1/2">{overview}</p>
       <div className="">
         <button
           type="button"
-          className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+          className="py-2 md:py-4 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
         >
           <i className="fa fa-play w-4"></i> Play
         </button>
