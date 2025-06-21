@@ -1,3 +1,6 @@
+# NetflixGPT
+![NetflixGPT](https://github.com/user-attachments/assets/8afc97ef-765c-4587-9cf5-a75e1dd04bf8)
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
